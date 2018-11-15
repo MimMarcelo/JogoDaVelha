@@ -7,12 +7,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class JogarFragment extends Fragment {
+public class JogoFragment extends Fragment {
     private JogoView jogoView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = super.onCreateView(inflater, container, savedInstanceState);
+        View v = inflater.inflate(R.layout.fragment_jogar, container, false);
 
         jogoView = v.findViewById(R.id.jogoView);
 //        jogoView.setTargetfragment(this);

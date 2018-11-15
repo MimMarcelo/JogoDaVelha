@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         Intent intent;
         if(v == btnJogar){
-            intent = new Intent(MainActivity.this, JogarActivity.class);
+            intent = new Intent(MainActivity.this, JogoActivity.class);
             startActivity(intent);
         }
     }
