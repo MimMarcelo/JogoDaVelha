@@ -26,18 +26,22 @@ public class JogoThread extends Thread {
     public void run() {
         Canvas canvas = null;
         long horaDoUltimoFrame = System.currentTimeMillis();
+        long horaAtual = 0;
+        double tempoPassado = 0;
 
         while(rodando){
             try{
                 canvas = holder.lockCanvas();
 
                 synchronized (holder){
-                    segundos += (System.currentTimeMillis() - horaDoUltimoFrame) / 1000;
+                    horaAtual = System.currentTimeMillis();
+                    tempoPassado = horaAtual - horaDoUltimoFrame;
+                    segundos += tempoPassado / 1000;
+                    jogo.setTempo(String.format("Tempo restante: %1$.1fs", segundos));
                     jogo.desenhar(canvas);
-                    if(segundos > 10)
-                        rodando = false;
 
                     Log.i(getName(), String.format("Segundos: %1$.1f", segundos));
+                    horaDoUltimoFrame = horaAtual;
                 }
             }
             catch (Exception e){

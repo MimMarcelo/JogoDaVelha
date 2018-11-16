@@ -8,6 +8,7 @@ public class Jogo {
     private Tabuleiro tabuleiro;
     private Paint background;
     private Paint textPaint;
+    private String tempo;
 
     public Jogo(){
         background = new Paint();
@@ -28,9 +29,13 @@ public class Jogo {
 
     }
 
+    public void setTempo(String tempo){
+        this.tempo = tempo;
+    }
+
     public void desenhar(Canvas canvas){
         canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), background);
-        canvas.drawText(String.format("Tempo restante: %1$.1fs", 30.1f), 30, 50, textPaint);
+        canvas.drawText(tempo, 30, 50, textPaint);
         tabuleiro.desenhar(canvas);
     }
 }
