@@ -1,14 +1,16 @@
 package com.mimmarcelo.jogodavelha.classes;
 
+import android.content.Context;
 import android.graphics.Canvas;
 
 public class Tabuleiro extends BaseObjeto {
 
     private int espessura;
 
-    public Tabuleiro(int alturaDaTela, int larguraDaTela) {
-        super(alturaDaTela, larguraDaTela);
+    public Tabuleiro(Context context, int larguraDaTela, int alturaDaTela) {
+        super(context, larguraDaTela, alturaDaTela);
         this.espessura = getPixelX()/6;
+
         getArte().setStrokeWidth(espessura);
     }
 

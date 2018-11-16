@@ -25,7 +25,7 @@ public class JogoView extends SurfaceView implements SurfaceHolder.Callback {
         activity = (AppCompatActivity)context;
         getHolder().addCallback(this);
 
-        jogo = new Jogo();
+        jogo = new Jogo(context);
 
     }
 

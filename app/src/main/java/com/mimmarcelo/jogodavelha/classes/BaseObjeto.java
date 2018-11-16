@@ -1,24 +1,31 @@
 package com.mimmarcelo.jogodavelha.classes;
 
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
 public abstract class BaseObjeto {
+    private Context context;
     private Paint arte;
     private int alturaDaTela;
     private int larguraDaTela;
     private boolean visivel;
 
-    public BaseObjeto(int alturaDaTela, int larguraDaTela) {
-        this(alturaDaTela, larguraDaTela, true);
+    public BaseObjeto(Context context, int larguraDaTela, int alturaDaTela) {
+        this(context, larguraDaTela, alturaDaTela, true);
     }
 
-    public BaseObjeto(int alturaDaTela, int larguraDaTela, boolean visivel) {
-        this.alturaDaTela = alturaDaTela;
+    public BaseObjeto(Context context, int larguraDaTela, int alturaDaTela, boolean visivel) {
+        this.context = context;
         this.larguraDaTela = larguraDaTela;
+        this.alturaDaTela = alturaDaTela;
         this.visivel = visivel;
 
         arte = new Paint();
+    }
+
+    public Context getContext(){
+        return context;
     }
 
     public Paint getArte() {
