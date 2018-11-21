@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 
 public class Tabuleiro extends BaseObjeto {
 
-//    private int espessura;
     private Barra barras[];
 
     public Tabuleiro(Context context, int larguraDaTela, int alturaDaTela) {
@@ -22,10 +21,6 @@ public class Tabuleiro extends BaseObjeto {
                 barras[i].setPosicao(getPixelX()*i, getPixelY()*2);
             }
         }
-//        this.espessura = getPixelX()/6;
-//
-//        getArte().setStrokeWidth(espessura);
-//        getArte().setAntiAlias(true);
     }
 
     public int getQuadro(float x, float y){
@@ -52,14 +47,7 @@ public class Tabuleiro extends BaseObjeto {
 
     @Override
     public void desenhar(Canvas canvas) {
-        //Linhas horizontais
-//        canvas.drawLine(getPixelX()*1, getPixelY()*3, getPixelX()*4, getPixelY()*3-espessura, getArte());
-//        canvas.drawLine(getPixelX()*1, getPixelY()*4, getPixelX()*4, getPixelY()*4-espessura, getArte());
         for(Barra b: barras)
             b.desenhar(canvas);
-//        barras[1].desenhar(canvas);
-        //Linhas verticais
-//        canvas.drawLine(getPixelX()*2+espessura, getPixelY()*2, getPixelX()*2, getPixelY()*5, getArte());
-//        canvas.drawLine(getPixelX()*3+espessura, getPixelY()*2, getPixelX()*3, getPixelY()*5, getArte());
     }
 }

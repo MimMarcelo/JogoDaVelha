@@ -6,10 +6,12 @@ import android.graphics.Canvas;
 public class Barra extends BaseObjeto {
     public static final int HORIZONTAL = 1;
     public static final int VERTICAL = 2;
+    public static final int DIAGONAL1 = 3;
+    public static final int DIAGONAL2 = 4;
     public int espessura;
     public int direcao;
-    public int x;
-    public int y;
+    public float x;
+    public float y;
     public float progressoX;
     public float progressoY;
     public boolean terminou;
@@ -31,17 +33,17 @@ public class Barra extends BaseObjeto {
         this.direcao = direcao;
     }
 
-    public void setPosicao(int x, int y) {
+    public void setPosicao(float x, float y) {
         this.x = x;
         this.y = y;
         if(this.direcao == HORIZONTAL){
             this.y+= espessura;
         }
-        else{
+        else if(this.direcao == VERTICAL){
             this.x+=espessura*4;
         }
-        this.progressoX = x;
-        this.progressoY = y;
+        this.progressoX = this.x;
+        this.progressoY = this.y;
 
     }
 
@@ -74,6 +76,22 @@ public class Barra extends BaseObjeto {
                 if(progressoY <= getPixelY()*5) {
                     progressoY += 10;
                     progressoX -= .18;
+                }
+                else
+                    terminou = true;
+                break;
+            case DIAGONAL1:
+                if(progressoX <= getPixelX()*4) {
+                    progressoY += 10;
+                    progressoX += 8.8;
+                }
+                else
+                    terminou = true;
+                break;
+            case DIAGONAL2:
+                if(progressoX <= getPixelX()*4) {
+                    progressoY -= 10;
+                    progressoX += 8.6;
                 }
                 else
                     terminou = true;
