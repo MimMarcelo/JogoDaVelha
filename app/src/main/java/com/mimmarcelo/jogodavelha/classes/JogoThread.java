@@ -3,6 +3,7 @@ package com.mimmarcelo.jogodavelha.classes;
 import android.graphics.Canvas;
 import android.util.Log;
 import android.view.SurfaceHolder;
+import android.widget.Toast;
 
 public class JogoThread extends Thread {
 
@@ -39,8 +40,11 @@ public class JogoThread extends Thread {
                 canvas = holder.lockCanvas();
                 synchronized (holder){
                     jogo.desenhar(canvas);
-                    if(jogo.isFimDeJogo())
+                    if(jogo.isFimDeJogo()) {
                         rodando = jogo.desenharFimDeJogo(canvas);
+
+                    }
+
                 }
             }
             catch (Exception e){

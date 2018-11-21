@@ -8,8 +8,6 @@ import android.widget.Toast;
 
 import com.mimmarcelo.jogodavelha.R;
 
-import java.util.ArrayList;
-
 public class Jogo {
     private Context context;
     private Paint background;
@@ -18,22 +16,28 @@ public class Jogo {
     private boolean carregando;
     private int contador;
     private boolean fimDeJogo;
+    private int ganhador;
 
     private Tabuleiro tabuleiro;
     private Simbolo simbolos[];
     private Barra barra;
+    private Jogador jogadores[];
 
-    public Jogo(Context context) {
+    public Jogo(Context context, Jogador jogador1, Jogador jogador2) {
         this.context = context;
         this.carregando = false;
         this.fimDeJogo = false;
         this.contador = 0;
+        this.ganhador = 2;//Não existe essa posição na lista de jogadores, portanto ninguém ganhou ainda
 
         background = new Paint();
         background.setColor(Color.WHITE);
 
         textPaint = new Paint();
 
+        jogadores = new Jogador[2];
+        jogadores[0] = jogador1;
+        jogadores[1] = jogador2;
     }
 
     public void configurarJanela(int altura, int largura) {
@@ -55,6 +59,12 @@ public class Jogo {
         textPaint.setAntiAlias(true);
     }
 
+    public Jogador getGanhador(){
+        if(ganhador < 2)
+            return jogadores[ganhador];
+
+        return null;
+    }
     public boolean isFimDeJogo() {
         if (!fimDeJogo)
             setFimDeJogo();
@@ -63,36 +73,44 @@ public class Jogo {
 
     public void setFimDeJogo() {
 
-        if (simbolos[0].getIdMarcado() != 2 && simbolos[0].getIdMarcado() == simbolos[1].getIdMarcado() && simbolos[0].getIdMarcado() == simbolos[2].getIdMarcado()) {
+        if (simbolos[0].getIdMarcado() != R.drawable.vazio && simbolos[0].getIdMarcado() == simbolos[1].getIdMarcado() && simbolos[0].getIdMarcado() == simbolos[2].getIdMarcado()) {
             fimDeJogo = true;
+            ganhador = (contador-1)%2;
             barra.setDirecao(Barra.VERTICAL);
             barra.setPosicao(barra.getPixelX() * 1.4f, barra.getPixelY() * 2);
-        } else if (simbolos[0].getIdMarcado() != 2 && simbolos[0].getIdMarcado() == simbolos[3].getIdMarcado() && simbolos[0].getIdMarcado() == simbolos[6].getIdMarcado()) {
+        } else if (simbolos[0].getIdMarcado() != R.drawable.vazio && simbolos[0].getIdMarcado() == simbolos[3].getIdMarcado() && simbolos[0].getIdMarcado() == simbolos[6].getIdMarcado()) {
             fimDeJogo = true;
+            ganhador = (contador-1)%2;
             barra.setDirecao(Barra.HORIZONTAL);
             barra.setPosicao(barra.getPixelX() * 1, barra.getPixelY() * 2.4f);
-        } else if (simbolos[0].getIdMarcado() != 2 && simbolos[0].getIdMarcado() == simbolos[4].getIdMarcado() && simbolos[0].getIdMarcado() == simbolos[8].getIdMarcado()) {
+        } else if (simbolos[0].getIdMarcado() != R.drawable.vazio && simbolos[0].getIdMarcado() == simbolos[4].getIdMarcado() && simbolos[0].getIdMarcado() == simbolos[8].getIdMarcado()) {
             fimDeJogo = true;
+            ganhador = (contador-1)%2;
             barra.setDirecao(Barra.DIAGONAL1);
             barra.setPosicao(barra.getPixelX() * 1, barra.getPixelY() * 2);
-        } else if (simbolos[1].getIdMarcado() != 2 && simbolos[1].getIdMarcado() == simbolos[4].getIdMarcado() && simbolos[1].getIdMarcado() == simbolos[7].getIdMarcado()) {
+        } else if (simbolos[1].getIdMarcado() != R.drawable.vazio && simbolos[1].getIdMarcado() == simbolos[4].getIdMarcado() && simbolos[1].getIdMarcado() == simbolos[7].getIdMarcado()) {
             fimDeJogo = true;
+            ganhador = (contador-1)%2;
             barra.setDirecao(Barra.HORIZONTAL);
             barra.setPosicao(barra.getPixelX() * 1, barra.getPixelY() * 3.4f);
-        } else if (simbolos[2].getIdMarcado() != 2 && simbolos[2].getIdMarcado() == simbolos[5].getIdMarcado() && simbolos[2].getIdMarcado() == simbolos[8].getIdMarcado()) {
+        } else if (simbolos[2].getIdMarcado() != R.drawable.vazio && simbolos[2].getIdMarcado() == simbolos[5].getIdMarcado() && simbolos[2].getIdMarcado() == simbolos[8].getIdMarcado()) {
             fimDeJogo = true;
+            ganhador = (contador-1)%2;
             barra.setDirecao(Barra.HORIZONTAL);
             barra.setPosicao(barra.getPixelX() * 1, barra.getPixelY() * 4.4f);
-        } else if (simbolos[2].getIdMarcado() != 2 && simbolos[2].getIdMarcado() == simbolos[4].getIdMarcado() && simbolos[2].getIdMarcado() == simbolos[6].getIdMarcado()) {
+        } else if (simbolos[2].getIdMarcado() != R.drawable.vazio && simbolos[2].getIdMarcado() == simbolos[4].getIdMarcado() && simbolos[2].getIdMarcado() == simbolos[6].getIdMarcado()) {
             fimDeJogo = true;
+            ganhador = (contador-1)%2;
             barra.setDirecao(Barra.DIAGONAL2);
             barra.setPosicao(barra.getPixelX() * 1, barra.getPixelY() * 5);
-        } else if (simbolos[3].getIdMarcado() != 2 && simbolos[3].getIdMarcado() == simbolos[4].getIdMarcado() && simbolos[3].getIdMarcado() == simbolos[5].getIdMarcado()) {
+        } else if (simbolos[3].getIdMarcado() != R.drawable.vazio && simbolos[3].getIdMarcado() == simbolos[4].getIdMarcado() && simbolos[3].getIdMarcado() == simbolos[5].getIdMarcado()) {
             fimDeJogo = true;
+            ganhador = (contador-1)%2;
             barra.setDirecao(Barra.VERTICAL);
             barra.setPosicao(barra.getPixelX() * 2.4f, barra.getPixelY() * 2);
-        } else if (simbolos[6].getIdMarcado() != 2 && simbolos[6].getIdMarcado() == simbolos[7].getIdMarcado() && simbolos[6].getIdMarcado() == simbolos[8].getIdMarcado()) {
+        } else if (simbolos[6].getIdMarcado() != R.drawable.vazio && simbolos[6].getIdMarcado() == simbolos[7].getIdMarcado() && simbolos[6].getIdMarcado() == simbolos[8].getIdMarcado()) {
             fimDeJogo = true;
+            ganhador = (contador-1)%2;
             barra.setDirecao(Barra.VERTICAL);
             barra.setPosicao(barra.getPixelX() * 3.4f, barra.getPixelY() * 2);
         } else if (contador == 9)
@@ -105,10 +123,12 @@ public class Jogo {
 
     public void realizarJogada(float x, float y) {
         if (!carregando && !fimDeJogo) {
+            int daVez = contador%2;
 
             carregando = true;
             int quadro = tabuleiro.getQuadro(x, y);
-            if (simbolos[quadro].marcar(contador))
+
+            if (simbolos[quadro].marcar(jogadores[daVez].getIdSimbolo()))
                 contador++;
 
             carregando = false;
@@ -125,6 +145,7 @@ public class Jogo {
     public void desenhar(Canvas canvas) {
         canvas.drawRect(0, 0, canvas.getWidth(), canvas.getHeight(), background);
         canvas.drawText(tempo, 30, 50, textPaint);
+        canvas.drawText("Vez do jogador: "+jogadores[contador%2].getNome(), 30, 80, textPaint);
         tabuleiro.desenhar(canvas);
         for (Simbolo simbolo : simbolos) {
             simbolo.desenhar(canvas);
@@ -132,7 +153,17 @@ public class Jogo {
     }
 
     public boolean desenharFimDeJogo(Canvas canvas) {
-        barra.desenhar(canvas);
-        return !barra.isTerminou();
+        String textoDeFimDeJogo = "";
+        if(getGanhador() == null){
+            textoDeFimDeJogo = "Empatou...";
+            canvas.drawText(textoDeFimDeJogo, 30, 120, textPaint);
+            return false;
+        }
+        else {
+            textoDeFimDeJogo = jogadores[ganhador].getNome() + " é o vencedor!";
+            canvas.drawText(textoDeFimDeJogo, 30, 120, textPaint);
+            barra.desenhar(canvas);
+            return !barra.isTerminou();
+        }
     }
 }

@@ -20,6 +20,7 @@ public class Simbolo extends BaseObjeto {
     }
 
     public void setIdImagem(int idVazio, int idX, int idO) {
+        idMarcado = idVazio;
         this.idImagem[2] = idVazio;
         this.idImagem[1] = idX;
         this.idImagem[0] = idO;
@@ -39,9 +40,9 @@ public class Simbolo extends BaseObjeto {
             this.esquerda += deslocamento;
     }
 
-    public boolean marcar(int contadorDeJogadas){
-        if(idMarcado == 2) {
-            idMarcado = contadorDeJogadas % 2;
+    public boolean marcar(int idMarcador){
+        if(idMarcado == idImagem[2]) {
+            idMarcado = idMarcador;
             return true;
         }
         return false;
@@ -63,7 +64,7 @@ public class Simbolo extends BaseObjeto {
 
     @Override
     public void desenhar(Canvas canvas) {
-        canvas.drawBitmap(BitmapFactory.decodeResource(getContext().getResources(), idImagem[idMarcado]), esquerda, topo, getArte());
+        canvas.drawBitmap(BitmapFactory.decodeResource(getContext().getResources(), idMarcado), esquerda, topo, getArte());
     }
 
 }

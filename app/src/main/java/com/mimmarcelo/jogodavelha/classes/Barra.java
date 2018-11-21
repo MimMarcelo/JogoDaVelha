@@ -25,10 +25,6 @@ public class Barra extends BaseObjeto {
         getArte().setAntiAlias(true);
     }
 
-    public int getEspessura() {
-        return espessura;
-    }
-
     public void setDirecao(int direcao) {
         this.direcao = direcao;
     }

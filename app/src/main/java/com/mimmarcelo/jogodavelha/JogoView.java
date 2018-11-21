@@ -9,6 +9,7 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
+import com.mimmarcelo.jogodavelha.classes.Jogador;
 import com.mimmarcelo.jogodavelha.classes.Jogo;
 import com.mimmarcelo.jogodavelha.classes.JogoThread;
 
@@ -26,7 +27,13 @@ public class JogoView extends SurfaceView implements SurfaceHolder.Callback {
         activity = (AppCompatActivity)context;
         getHolder().addCallback(this);
 
-        jogo = new Jogo(context);
+        Jogador j1 = new Jogador();
+        j1.setNome("Marcelo");
+        j1.setIdSimbolo(R.drawable.x);
+        Jogador j2 = new Jogador();
+        j2.setNome("Ana");
+        j2.setIdSimbolo(R.drawable.o);
+        jogo = new Jogo(context, j1, j2);
 
     }
 
