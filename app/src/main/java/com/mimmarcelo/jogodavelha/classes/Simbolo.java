@@ -6,7 +6,8 @@ import android.graphics.Canvas;
 
 public class Simbolo extends BaseObjeto {
 
-    private int idImagem;
+    private int idImagem[];
+    private int idMarcado;
     private int esquerda;
     private int topo;
     private int deslocamento;
@@ -14,10 +15,14 @@ public class Simbolo extends BaseObjeto {
     public Simbolo(Context context, int larguraDaTela, int alturaDaTela) {
         super(context, larguraDaTela, alturaDaTela);
         deslocamento = getPixelX()/15;
+        idImagem = new int[3];
+        idMarcado = 2;
     }
 
-    public void setIdImagem(int idImagem) {
-        this.idImagem = idImagem;
+    public void setIdImagem(int idVazio, int idX, int idO) {
+        this.idImagem[2] = idVazio;
+        this.idImagem[1] = idX;
+        this.idImagem[0] = idO;
     }
 
     public void setPosicao(int esquerda, int topo) {
@@ -34,6 +39,18 @@ public class Simbolo extends BaseObjeto {
             this.esquerda += deslocamento;
     }
 
+    public boolean marcar(int contadorDeJogadas){
+        if(idMarcado == 2) {
+            idMarcado = contadorDeJogadas % 2;
+            return true;
+        }
+        return false;
+    }
+
+    public int getIdMarcado(){
+        return idMarcado;
+    }
+
     @Override
     public void reiniciar() {
 
@@ -46,6 +63,7 @@ public class Simbolo extends BaseObjeto {
 
     @Override
     public void desenhar(Canvas canvas) {
-        canvas.drawBitmap(BitmapFactory.decodeResource(getContext().getResources(), idImagem), esquerda, topo, getArte());
+        canvas.drawBitmap(BitmapFactory.decodeResource(getContext().getResources(), idImagem[idMarcado]), esquerda, topo, getArte());
     }
+
 }

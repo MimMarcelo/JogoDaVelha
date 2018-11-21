@@ -30,18 +30,17 @@ public class JogoThread extends Thread {
         double tempoPassado = 0;
 
         while(rodando){
+            horaAtual = System.currentTimeMillis();
+            tempoPassado = horaAtual - horaDoUltimoFrame;
+            segundos += tempoPassado / 1000;
+            jogo.setTempo(String.format("Tempo restante: %1$.1fs", segundos));
+
             try{
                 canvas = holder.lockCanvas();
-
                 synchronized (holder){
-                    horaAtual = System.currentTimeMillis();
-                    tempoPassado = horaAtual - horaDoUltimoFrame;
-                    segundos += tempoPassado / 1000;
-                    jogo.setTempo(String.format("Tempo restante: %1$.1fs", segundos));
                     jogo.desenhar(canvas);
-
-                    Log.i(getName(), String.format("Segundos: %1$.1f", segundos));
-                    horaDoUltimoFrame = horaAtual;
+                    if(jogo.isFimDeJogo())
+                        rodando = jogo.desenharFimDeJogo(canvas);
                 }
             }
             catch (Exception e){
@@ -51,6 +50,7 @@ public class JogoThread extends Thread {
                 if(canvas != null)
                     holder.unlockCanvasAndPost(canvas);
             }
+            horaDoUltimoFrame = horaAtual;
         }
     }
 }

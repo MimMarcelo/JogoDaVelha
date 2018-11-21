@@ -5,6 +5,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
@@ -47,6 +48,7 @@ public class JogoView extends SurfaceView implements SurfaceHolder.Callback {
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
+
         jogo.configurarJanela(h, w);
 
     }
@@ -75,5 +77,12 @@ public class JogoView extends SurfaceView implements SurfaceHolder.Callback {
                 Log.e("JogoView", "Thread interrompida", e);
             }
         }
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        if(event.getAction() == MotionEvent.ACTION_DOWN)
+            jogo.realizarJogada(event.getX(), event.getY());
+        return true;
     }
 }
