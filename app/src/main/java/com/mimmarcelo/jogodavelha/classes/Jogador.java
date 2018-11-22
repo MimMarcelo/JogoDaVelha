@@ -5,10 +5,6 @@ public class Jogador {
     private String nome;
     private int idSimbolo;
 
-    public Jogador(){
-
-    }
-
     public String getNome() {
         return nome;
     }
@@ -23,5 +19,9 @@ public class Jogador {
 
     public void setIdSimbolo(int idSimbolo) {
         this.idSimbolo = idSimbolo;
+    }
+
+    public boolean jogar(Simbolo simbolos[], int quadro){
+        return simbolos[quadro].marcar(idSimbolo);
     }
 }

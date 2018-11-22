@@ -66,13 +66,12 @@ public class Jogo {
         return null;
     }
     public boolean isFimDeJogo() {
-        if (!fimDeJogo)
-            setFimDeJogo();
         return fimDeJogo;
     }
 
     public void setFimDeJogo() {
 
+        contador++;
         if (simbolos[0].getIdMarcado() != R.drawable.vazio && simbolos[0].getIdMarcado() == simbolos[1].getIdMarcado() && simbolos[0].getIdMarcado() == simbolos[2].getIdMarcado()) {
             fimDeJogo = true;
             ganhador = (contador-1)%2;
@@ -123,14 +122,19 @@ public class Jogo {
 
     public void realizarJogada(float x, float y) {
         if (!carregando && !fimDeJogo) {
+            carregando = true;
             int daVez = contador%2;
 
-            carregando = true;
             int quadro = tabuleiro.getQuadro(x, y);
 
-            if (simbolos[quadro].marcar(jogadores[daVez].getIdSimbolo()))
-                contador++;
-
+            if (jogadores[daVez].jogar(simbolos, quadro)) {
+                setFimDeJogo();
+                daVez = contador%2;
+                if(!isFimDeJogo() && jogadores[daVez] instanceof Npc){
+                    jogadores[daVez].jogar(simbolos, 0);
+                    setFimDeJogo();
+                }
+            }
             carregando = false;
         }
         if (fimDeJogo) {

@@ -12,6 +12,7 @@ import android.view.SurfaceView;
 import com.mimmarcelo.jogodavelha.classes.Jogador;
 import com.mimmarcelo.jogodavelha.classes.Jogo;
 import com.mimmarcelo.jogodavelha.classes.JogoThread;
+import com.mimmarcelo.jogodavelha.classes.Npc;
 
 /**
  * TODO: document your custom view class.
@@ -30,8 +31,7 @@ public class JogoView extends SurfaceView implements SurfaceHolder.Callback {
         Jogador j1 = new Jogador();
         j1.setNome("Marcelo");
         j1.setIdSimbolo(R.drawable.x);
-        Jogador j2 = new Jogador();
-        j2.setNome("Ana");
+        Jogador j2 = new Npc();
         j2.setIdSimbolo(R.drawable.o);
         jogo = new Jogo(context, j1, j2);
 
